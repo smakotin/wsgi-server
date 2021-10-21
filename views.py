@@ -11,7 +11,7 @@ chat_message = []
 def chat(request_method, http_cookie, body):
     body = parse_body(body)
     cookies = parse_cookies(http_cookie)
-    user_id = int(cookies.get("user_id"))
+    user_id = int(cookies.get("user_id", 0))
     user_name = db.get(user_id)
     if user_name is None:
         return "307 Temporary Redirect", [("Location", f"http://localhost:8000/register"), ("Set-Cookie", "location=chat")], b""
